@@ -90,46 +90,50 @@ const MealSection = () => {
             key={meal.id}
             sx={{
               width: "100%",
-              height: "30%",
-              padding: "0.6rem 0rem",
+              padding: "0.6rem",
             }}
             elevation={0}
           >
-            <Stack spacing={2} direction={{ xs: "column", sm: "row" }}>
-              <Stack direction="row" spacing={2}>
-                <CardMedia
-                  component="img"
-                  sx={{
-                    width: {
-                      xs: "150px",
-                      sm: "10rem",
-                    },
-                    height: {
-                      xs: "120px",
-                      sm: "10rem",
-                    },
-                    objectFit: "cover",
-                  }}
-                  image={meal.img}
-                />
-                <CardContent
-                  sx={{
-                    padding: "0rem 1rem",
-                  }}
-                >
-                  <Typography color="text.secondary">{meal.title}</Typography>
-                  <Typography variant="body2">
-                    <strong>Starter:</strong> {meal.starter}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Desert:</strong> {meal.desert}
-                  </Typography>
-                  <Typography variant="h6">
-                    <strong>Price:</strong> ₹{meal.price}
-                  </Typography>
-                </CardContent>
-              </Stack>
-              <Stack direction="row" spacing={2}>
+            <Stack
+              spacing={2}
+              direction={{ xs: "column", sm: "row" }}
+              alignItems="center"
+            >
+              <CardMedia
+                component="img"
+                sx={{
+                  width: {
+                    xs: "150px",
+                    sm: "150px",
+                  },
+                  height: {
+                    xs: "120px",
+                    sm: "150px",
+                  },
+                  objectFit: "cover",
+
+
+                }}
+                image={meal.img}
+              />
+              <CardContent
+                sx={{
+                  padding: "0rem 1rem",
+                  flexGrow: 1,
+                }}
+              >
+                <Typography color="text.secondary">{meal.title}</Typography>
+                <Typography variant="body2">
+                  <strong>Starter:</strong> {meal.starter}
+                </Typography>
+                <Typography variant="body2">
+                  <strong>Desert:</strong> {meal.desert}
+                </Typography>
+                <Typography variant="h6">
+                  <strong>Price:</strong> ₹{meal.price}
+                </Typography>
+              </CardContent>
+              <Stack direction="row" spacing={2} alignItems="center">
                 <FormControl fullWidth>
                   <InputLabel id={`drink-select-label-${meal.id}`}>
                     Drinks
@@ -142,7 +146,7 @@ const MealSection = () => {
                     onChange={(e) => handleDrinkSelect(meal.id, e.target.value)}
                     sx={{
                       height: "40px",
-                      padding: "0 1rem",
+                      minWidth: "120px",
                     }}
                   >
                     {meal.drinks.map((drink) => (
@@ -157,7 +161,7 @@ const MealSection = () => {
                   variant={isMealSelected ? "contained" : "outlined"}
                   sx={{
                     height: "40px",
-                    padding: "0 2rem",
+                    minWidth: "100px",
                     borderColor: isMealSelected ? "#f44336" : "#3f51b5",
                     color: isMealSelected ? "#ffffff" : "#3f51b5",
                     backgroundColor: isMealSelected ? "#f44336" : "inherit",

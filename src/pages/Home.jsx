@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Box, Typography, Stack, Pagination, Drawer, Button } from "@mui/material";
 import FlightIcon from "@mui/icons-material/Flight";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +13,20 @@ function Home() {
   const dispatch = useDispatch();
   const totalPages = useSelector((state) => state.page.totalPages);
   const [isMobile, setIsMobile] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(false); 
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 600);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const toggleDrawer = (open) => () => {
     setDrawerOpen(open);
@@ -64,6 +77,11 @@ function Home() {
               sm: "1rem",
             },
           }}
+          overflow={
+            isMobile
+              ? "auto"
+              : "hidden"
+          }
         >
           <MealSection />
         </Grid>
@@ -89,9 +107,7 @@ function Home() {
             <Button onClick={toggleDrawer(true)}>
               <MenuIcon />
             </Button>
-            <DrawerPhone open={drawerOpen} onClose={toggleDrawer(false)}>
-
-            </DrawerPhone>
+            <DrawerPhone open={drawerOpen} onClose={toggleDrawer(false)} />
           </Box>
 
           <Pagination
@@ -122,10 +138,8 @@ function Home() {
             gap: {
               xs: "0.5rem",
               sm: "1rem",
-            
-            }
+            },
           }}
-          
         >
           <FlightIcon
             fontSize="small"
@@ -134,18 +148,16 @@ function Home() {
               transform: "rotate(90deg)",
             }}
           />
-          <Typography variant="">Select meal</Typography>
+          <Typography>Select meal</Typography>
         </Box>
 
         <Stack
           spacing={2}
           sx={{
             marginTop: "2rem",
-
           }}
         >
           <PersonSelector />
-          
         </Stack>
       </Grid>
     </Grid>
