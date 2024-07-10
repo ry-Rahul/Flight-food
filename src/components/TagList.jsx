@@ -46,7 +46,7 @@ const TagList = () => {
                 bgcolor: label === item ? "#ebeafb" : "",
                 borderColor: label === item ? "#5d4bda" : "",
                 fontSize: {
-                  xs: "0.8rem",
+                  xs: "0.7rem",
                   sm: "1rem",
                    
                 },
