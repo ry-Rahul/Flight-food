@@ -10,7 +10,8 @@ const Home = lazy(() => import("./pages/Home"));
 const Login = lazy(() => import("./pages/Login"));
 
 function App() {
-  const user = useSelector((state) => state.page.user);
+  // const user = useSelector((state) => state.page.user);
+  const user = true;
   const [data, setData] = useState({});
   const dispatch = useDispatch();
 
