@@ -27,7 +27,7 @@ function App() {
         .get("https://foodflight-backend.onrender.com/api/data", { headers: headers })
         .then((res) => {
           setData(res.data.message);
-          toast.success("User data fetched successfully");
+          // toast.success("User data fetched successfully");
         })
         .catch((err) => {
           console.log(err);
