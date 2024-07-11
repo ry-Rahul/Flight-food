@@ -28,22 +28,25 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3001/api/login", {
-        username,
-        password,
-      });
-      toast.success("Login Successful");
-      dispatch(setUserIsLogged(true));
-      if (res.data && res.data.token) {
-        localStorage.setItem(
-          "login",
-          JSON.stringify({
-            login: true,
-            token: res.data.token,
-            username: username,
-          })
-        );
-      }
+      const res = await axios
+        .post("https://foodflight-backend.onrender.com/api/login", {
+          username,
+          password,
+        })
+        .then((res) => {
+          toast.success("Login Successful");
+          dispatch(setUserIsLogged(true));
+          if (res.data && res.data.token) {
+            localStorage.setItem(
+              "login",
+              JSON.stringify({
+                login: true,
+                token: res.data.token,
+                username: username,
+              })
+            );
+          }
+        });
     } catch (err) {
       if (err.response) {
         toast.error(err.response.data.message || "Login Failed");
@@ -66,7 +69,7 @@ function Login() {
       });
       toast.success("Registration Successful");
       dispatch(setUserIsLogged(true));
-      console.log(res.data.token)
+      console.log(res.data.token);
       if (res.data && res.data.token) {
         localStorage.setItem(
           "login",

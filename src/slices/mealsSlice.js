@@ -1,11 +1,14 @@
-
 import { createSlice } from '@reduxjs/toolkit';
-import data from '../assets/data';
 
 const mealsSlice = createSlice({
   name: 'meals',
-  initialState: data,
-  reducers: {},
+  initialState: {},
+  reducers: {
+    setDataIntoStore(state, action) {
+      return action.payload; // Return new state instead of modifying the existing state
+    },
+  },
 });
 
+export const { setDataIntoStore } = mealsSlice.actions;
 export default mealsSlice.reducer;
